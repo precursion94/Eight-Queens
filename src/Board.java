@@ -16,37 +16,37 @@ public class Board {
             for(int c = 0; c < board.length; c++) {
                 Queen queen = board[r][c];
                if(queen != null) {
-                   boolean collisionExists = testQueenCollision(queen);
-                   if(collisionExists) {
+                   int collisions = countQueenCollisions(queen);
 
-                       System.out.println("Collision at: (" + r + ", " + c + ")");
+                       System.out.println("Collisions: "  + collisions);
                        return;
-                   }
                }
 
             }
         }
     }
 
-    public boolean testQueenCollision(Queen queen) {
-        if(!testUp(queen))
-            return false;
-        else if (!testDown(queen))
-            return false;
-        else if (!testRight(queen))
-            return false;
-        else if (!testLeft(queen))
-            return false;
-        else if(!testUpRight(queen))
-            return false;
-        else if (!testUpLeft(queen))
-            return false;
-        else if (!testDownRight(queen))
-            return false;
-        else if (!testDownLeft(queen))
-            return false;
+    public int countQueenCollisions (Queen queen) {
+        int counter = 0;
 
-        return true;
+        if(!testUp(queen))
+            counter++;
+        else if (!testDown(queen))
+            counter++;
+        else if (!testRight(queen))
+            counter++;
+        else if (!testLeft(queen))
+            counter++;
+        else if(!testUpRight(queen))
+            counter++;
+        else if (!testUpLeft(queen))
+            counter++;
+        else if (!testDownRight(queen))
+            counter++;
+        else if (!testDownLeft(queen))
+            counter++;
+
+        return counter;
     }
 //  true = no collisions; false = collision
     public boolean testUp(Queen queen) {
