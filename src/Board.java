@@ -14,12 +14,16 @@ public class Board {
 
         for(int r = 0; r < board.length; r++) {
             for(int c = 0; c < board.length; c++) {
-                boolean collisionExists = testQueenCollision(board[r][c]);
-                if(collisionExists) {
+                Queen queen = board[r][c];
+               if(queen != null) {
+                   boolean collisionExists = testQueenCollision(queen);
+                   if(collisionExists) {
 
-                    System.out.println("Collision at: (" + r + ", " + c + ")");
-                    return;
-                }
+                       System.out.println("Collision at: (" + r + ", " + c + ")");
+                       return;
+                   }
+               }
+
             }
         }
     }
