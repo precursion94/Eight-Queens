@@ -14,7 +14,7 @@ public class Board {
         return board;
     }
 
-    public int getFitness(String coordinateString) {
+    public int getFitness() {
         //setBoardState(coordinateString);
 
         int totalCollisions =0;
@@ -36,19 +36,19 @@ public class Board {
 
         if(!testUp(queen))
             counter++;
-        else if (!testDown(queen))
+        if (!testDown(queen))
             counter++;
-        else if (!testRight(queen))
+        if (!testRight(queen))
             counter++;
-        else if (!testLeft(queen))
+        if (!testLeft(queen))
             counter++;
-        else if(!testUpRight(queen))
+        if(!testUpRight(queen))
             counter++;
-        else if (!testUpLeft(queen))
+        if (!testUpLeft(queen))
             counter++;
-        else if (!testDownRight(queen))
+        if (!testDownRight(queen))
             counter++;
-        else if (!testDownLeft(queen))
+        if (!testDownLeft(queen))
             counter++;
 
         return counter;
