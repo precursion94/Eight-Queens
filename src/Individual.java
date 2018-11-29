@@ -10,7 +10,7 @@ public class Individual {
 	Individual(int number, int[] coords){
 		this.coords = coords;
 		this.number = number;
-		//calculate fitness
+		//assign fitness metric
 	}
 	
 	public void mutate() {
@@ -44,5 +44,15 @@ public class Individual {
 	
 	public void setNumber(int number) {
 		this.number = number;
+	}
+	
+	private String arrayToString(int[] coords) {
+		String coordString = "";
+		
+		for(int i : coords) {
+			coordString = coordString + i;
+		}
+		
+		return coordString;
 	}
 }

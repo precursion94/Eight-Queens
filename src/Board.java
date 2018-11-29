@@ -1,27 +1,29 @@
 public class Board {
     private Queen[][] board;
+    private String coords;
 
     public Board(String coordinateString) {
         setBoardState(coordinateString);
-
     }
+    
+    public Board() {
+    	
+    }
+    
     public Queen[][] getBoard() {
         return board;
     }
 
-    public void testNewState(String coordinateString) {
-        setBoardState(coordinateString);
+    public void testNewState() {
 
         for(int r = 0; r < board.length; r++) {
             for(int c = 0; c < board.length; c++) {
-                Queen queen = board[r][c];
+               Queen queen = board[r][c];
                if(queen != null) {
-                   int collisions = countQueenCollisions(queen);
-
-                       System.out.println("Collisions: "  + collisions);
-                       return;
+	               int collisions = countQueenCollisions(queen);
+	               System.out.println("Collisions: "  + collisions);
+	               return;
                }
-
             }
         }
     }

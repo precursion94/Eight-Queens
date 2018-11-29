@@ -2,9 +2,11 @@ import java.util.Random;
 
 public class Main {
 	private static final int copyRate = 40;
+	private static final int crossRate = 60;
 
 	public static void main(String[] args) {
-				
+		Population initPop = initialPopulation();
+		printPopulation(initPop);
 	}
 	
 	/*Creates a random individual*/
@@ -13,10 +15,35 @@ public class Main {
 		return individual;
 	}
 	
-	private static void printIndividual(Individual individual) {
-		System.out.println("Individual #: " + individual.getNumber());
-		System.out.println("Fitness: " + individual.getFitness());
-		System.out.print("Coords: "); printIntArray(individual.getCoords()); System.out.println();
+	private static Population initialPopulation() {
+		Individual[] individuals = new Individual[100];
+		
+		for(int i = 0; i < 100; i++) {
+			individuals[i] = randomIndividual();
+			individuals[i].setNumber(i+1);
+		}
+		
+		Population initPop = new Population(individuals);
+		
+		return initPop;
+	}
+	
+	private static void performCrossover(Population source, Population target){
+		/*potential reference/value problem*/
+		/*modifying original population individual? does it even matter?*/
+		Individual mother = source.selectIndividual();
+		Individual father = source.selectIndividual();
+		Individual crossed = new Individual(target.individuals.length + 1, crossover(mother.getCoords(), father.getCoords()));
+		crossed.mutationRoulette();
+		target.individuals[target.individuals.length + 1] = crossed;
+	}
+	
+	private static Population performCrossovers(Population source, Population target) {
+		for (int i = 0; i < crossRate; i++) {
+			performCrossover(source, target);
+		}
+		
+		return target;
 	}
 	
 	/**/
@@ -96,6 +123,18 @@ public class Main {
 		}
 		
 		return coords;
+	}
+	
+	private static void printPopulation(Population population) {
+		for (Individual individual : population.individuals) {
+			printIndividual(individual);
+		}
+	}
+	
+	private static void printIndividual(Individual individual) {
+		System.out.println("Individual #: " + individual.getNumber());
+		System.out.println("Fitness: " + individual.getFitness());
+		System.out.print("Coords: "); printIntArray(individual.getCoords()); System.out.println();
 	}
 	
 	private static void printIntArray(int[] input) {
