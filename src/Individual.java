@@ -10,12 +10,16 @@ public class Individual {
 	Individual(int number, int[] coords){
 		this.coords = coords;
 		this.number = number;
-		//calculate fitness
+		//assign fitness metric
 	}
 	
 	public void mutate() {
 		int randomIndex = rand.nextInt(8);
 		int randomValue = rand.nextInt(8);
+		
+		while(randomValue == coords[randomIndex]) {
+			randomValue = rand.nextInt(8);
+		}
 		
 		coords[randomIndex] = randomValue;
 	}
@@ -36,5 +40,19 @@ public class Individual {
 	
 	public int getNumber() {
 		return number;
+	}
+	
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	
+	private String arrayToString(int[] coords) {
+		String coordString = "";
+		
+		for(int i : coords) {
+			coordString = coordString + i;
+		}
+		
+		return coordString;
 	}
 }

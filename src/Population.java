@@ -3,13 +3,13 @@ import java.util.Random;
 public class Population {
 	public static final int POPULATION_SIZE = 100;
 	private static final int SELECTION_SIZE = 8;
-	private static Individual[] individuals = new Individual[POPULATION_SIZE];
+	public static Individual[] individuals = new Individual[POPULATION_SIZE];
 	
 	Population(Individual[] individuals) {
 		this.individuals = individuals;
 	}
 	
-	public static double averageFitness() {
+	public double averageFitness() {
 		int fitnessSum = 0;
 		double average;
 		
@@ -22,13 +22,13 @@ public class Population {
 		return average;
 	}
 	
-	public static Individual selectIndividual() {
+	public Individual selectIndividual() {
 		Random rand = new Random();
 		
 		return individuals[rand.nextInt(POPULATION_SIZE)];
 	}
 	
-	public static Individual getFittest() {
+	public Individual getFittest() {
 		Individual leader = null;
 		for (Individual individual : individuals) {
 			if((leader.getFitness() < individual.getFitness()) || (leader == null) ) {
@@ -37,5 +37,9 @@ public class Population {
 		}
 		
 		return leader;
+	}
+	
+	public void emptyPopulation() {		
+		individuals = null;
 	}
 }
