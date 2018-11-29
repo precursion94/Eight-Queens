@@ -3,7 +3,7 @@ import java.util.Random;
 public class Population {
 	public static final int POPULATION_SIZE = 100;
 	private static final int SELECTION_SIZE = 8;
-	private static Individual[] individuals = new Individual[POPULATION_SIZE];
+	public static Individual[] individuals = new Individual[POPULATION_SIZE];
 	
 	Population(Individual[] individuals) {
 		this.individuals = individuals;
@@ -37,5 +37,9 @@ public class Population {
 		}
 		
 		return leader;
+	}
+	
+	public static void emptyPopulation() {		
+		individuals = null;
 	}
 }

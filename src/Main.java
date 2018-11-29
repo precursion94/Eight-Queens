@@ -1,18 +1,10 @@
 import java.util.Random;
 
 public class Main {
+	private static final int copyRate = 40;
 
 	public static void main(String[] args) {
-		int[] coordOne = coords();
-		int[] coordTwo = coords();
-		
-		int[] crossed = crossover(coordOne, coordTwo);
-		
-		Individual ind = new Individual(1, coordOne);
-		printIntArray(ind.getCoords());
-		printIntArray(mutation(ind.getCoords()));
-		printIntArray(ind.getCoords());
-		printIndividual(ind);
+				
 	}
 	
 	/*Creates a random individual*/
@@ -25,6 +17,26 @@ public class Main {
 		System.out.println("Individual #: " + individual.getNumber());
 		System.out.println("Fitness: " + individual.getFitness());
 		System.out.print("Coords: "); printIntArray(individual.getCoords()); System.out.println();
+	}
+	
+	/**/
+	private static void performCopy(Population source, Population target) {
+		/*potential reference/value problem*/
+		/*modifying original population individual? does it even matter?*/
+		Individual randomIndividual = source.selectIndividual();
+		randomIndividual.mutationRoulette();
+		randomIndividual.setNumber(target.individuals.length + 1);
+		
+		target.individuals[target.individuals.length + 1] = randomIndividual;
+	}
+	
+	/**/
+	private static Population performCopies(Population source, Population target) {
+		for (int i = 0; i < copyRate; i++){
+			performCopy(source, target);
+		}
+		
+		return target;
 	}
 	
 	/*Cross Over*/	
