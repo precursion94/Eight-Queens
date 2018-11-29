@@ -9,21 +9,22 @@ public class Board {
         return board;
     }
 
-    public void testNewState(String coordinateString) {
-        setBoardState(coordinateString);
+    public int getFitness(String coordinateString) {
+        //setBoardState(coordinateString);
 
+        int totalCollisions =0;
         for(int r = 0; r < board.length; r++) {
             for(int c = 0; c < board.length; c++) {
                 Queen queen = board[r][c];
                if(queen != null) {
-                   int collisions = countQueenCollisions(queen);
+                   totalCollisions += countQueenCollisions(queen);
 
-                       System.out.println("Collisions: "  + collisions);
-                       return;
+//                       System.out.println("Collisions: "  + collisions);
                }
 
             }
         }
+        return totalCollisions;
     }
 
     public int countQueenCollisions (Queen queen) {
