@@ -15,7 +15,10 @@ public class Main {
 		System.out.println("NEXTGEN");
 		printPopulation(nextGen);
 		
-		printIndividual(nextGen.selectIndividual());
+		System.out.println("TESTPOP1");
+		printPopulation(testPop1);
+		
+		//printIndividual(nextGen.selectIndividual());
 		
 	}
 	
@@ -39,7 +42,7 @@ public class Main {
 	}
 	
 	private static Population nextGeneration(Population currentGeneration) {
-		Population nextGeneration = null;
+		Population nextGeneration = new Population();
 		
 		nextGeneration = performCopies(currentGeneration, nextGeneration);
 		nextGeneration = performCrossovers(currentGeneration, nextGeneration);
@@ -162,8 +165,9 @@ public class Main {
 			printIndividual(individual);
 			fitnessSum = fitnessSum + individual.getFitness();
 		}
-		double averageFitness = fitnessSum / 100.00;
-		System.out.println("Population Average Fitness: " + averageFitness + "\n");
+		//double averageFitness = fitnessSum / 100.00;
+		//System.out.println("Population Average Fitness: " + averageFitness + "\n");
+		System.out.println("Population Average Fitness: " + population.averageFitness() + "\n");
 	}
 	
 	private static void printIndividual(Individual individual) {

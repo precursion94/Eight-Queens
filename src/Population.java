@@ -5,17 +5,21 @@ public class Population {
 	private static final int SELECTION_SIZE = 8;
 	public static Individual[] individuals = new Individual[POPULATION_SIZE];
 	
+	Population() {
+		
+	}
+	
 	Population(Individual[] individuals) {
 		this.individuals = individuals;
 	}
 	
 	public double averageFitness() {
-		int fitnessSum = 0;
+		double fitnessSum = 0.00;
 		double average;
 		
 		for (Individual individual : individuals) {
-			System.out.println("Wal");
-			//fitnessSum = fitnessSum + individual.getFitness();
+			//System.out.println("Wal");
+			fitnessSum = fitnessSum + individual.getFitness();
 		}
 		
 		average = fitnessSum / POPULATION_SIZE;
