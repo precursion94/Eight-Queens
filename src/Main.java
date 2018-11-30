@@ -8,14 +8,15 @@ public class Main {
 
 	public static void main(String[] args) {
 		Population testPop1 = initialPopulation();
-		//Population testPop2 = initialPopulation();
-		//System.out.println("TESTPOP1");
-		//printPopulation(testPop1);
+		System.out.println("TESTPOP1");
+		printPopulation(testPop1);
 		
 		Population nextGen = nextGeneration(testPop1);
 		System.out.println("NEXTGEN");
 		printPopulation(nextGen);
-		//printPopulation(nextGen);
+		
+		printIndividual(nextGen.selectIndividual());
+		
 	}
 	
 	/*Creates a random individual*/
@@ -40,11 +41,8 @@ public class Main {
 	private static Population nextGeneration(Population currentGeneration) {
 		Population nextGeneration = null;
 		
-		performCopies(currentGeneration, nextGeneration);
-		performCrossovers(currentGeneration, nextGeneration);
-		
-		System.out.println("Woop");
-		printPopulation(nextGeneration);
+		nextGeneration = performCopies(currentGeneration, nextGeneration);
+		nextGeneration = performCrossovers(currentGeneration, nextGeneration);
 		
 		return nextGeneration;
 	}
@@ -54,11 +52,11 @@ public class Main {
 		/*modifying original population individual? does it even matter?*/
 		Individual mother = source.selectIndividual();
 		Individual father = source.selectIndividual();
-		System.out.print(arrayIndex);
-		System.out.print(" Mother: " + mother.getFitness());
-		System.out.print(" Father: " + father.getFitness());
+		//System.out.print(arrayIndex);
+		//System.out.print(" Mother: " + mother.getFitness());
+		//System.out.print(" Father: " + father.getFitness());
 		Individual crossed = new Individual(arrayIndex, crossover(mother.getCoords(), father.getCoords()));
-		System.out.println(" Crossed: " + crossed.getFitness());
+		//System.out.println(" Crossed: " + crossed.getFitness());
 		crossed.mutationRoulette();
 		crossed.recalculateFitness();
 		target.individuals[arrayIndex] = crossed;
@@ -78,12 +76,12 @@ public class Main {
 		/*potential reference/value problem*/
 		/*modifying original population individual? does it even matter?*/
 		Individual randomIndividual = source.selectIndividual();
-		System.out.print(arrayIndex);
-		System.out.print(" RandFit: " + randomIndividual.getFitness());
+		//System.out.print(arrayIndex);
+		//System.out.print(" RandFit: " + randomIndividual.getFitness());
 		Individual copy = new Individual(arrayIndex, randomIndividual.getCoords());
-		System.out.print(" Premutate: " + copy.getFitness());
+		//System.out.print(" Premutate: " + copy.getFitness());
 		copy.mutationRoulette();
-		System.out.println(" CopyFit: " + copy.getFitness());
+		//System.out.println(" CopyFit: " + copy.getFitness());
 		
 		target.individuals[arrayIndex] = copy;
 		arrayIndex++;
@@ -159,11 +157,13 @@ public class Main {
 	}
 	
 	private static void printPopulation(Population population) {
+		int fitnessSum = 0;
 		for (Individual individual : population.individuals) {
 			printIndividual(individual);
+			fitnessSum = fitnessSum + individual.getFitness();
 		}
-		System.out.println();
-		//System.out.println("Population Fitness: " + population.averageFitness() + "\n");
+		double averageFitness = fitnessSum / 100.00;
+		System.out.println("Population Average Fitness: " + averageFitness + "\n");
 	}
 	
 	private static void printIndividual(Individual individual) {
