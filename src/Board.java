@@ -166,7 +166,7 @@ public class Board {
         this.board = new Queen[8][8];
         for(int col = 0; col < 8; col++) {
             String sRow = coordinateString.charAt(col) + "";
-            int row = Integer.parseInt(sRow)-1;
+            int row = Integer.parseInt(sRow);
             board[row][col] = new Queen(row,col);
         }
     }
