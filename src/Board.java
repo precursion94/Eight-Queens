@@ -6,10 +6,10 @@ public class Board {
         setBoardState(coordinateString);
     }
     
-     private Board() {
-
+    public Board() {
+    	
     }
-
+    
     public Queen[][] getBoard() {
         return board;
     }
