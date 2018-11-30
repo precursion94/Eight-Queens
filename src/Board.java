@@ -58,7 +58,7 @@ public class Board {
         if(queen.getRow() == 7) {
             return true;
         }
-        for(int r = queen.getRow(); r < 8; r++) {
+        for(int r = queen.getRow()+1; r < 8; r++) {
             if(board[r][queen.getCol()] != null)
                 return false;
         }
@@ -68,7 +68,7 @@ public class Board {
         if(queen.getRow() == 0) {
             return true;
         }
-        for(int r = queen.getRow(); r >= 0; r--) {
+        for(int r = queen.getRow()-1; r >= 0; r--) {
             if(board[r][queen.getCol()] != null)
                 return false;
         }
@@ -79,7 +79,7 @@ public class Board {
         if(queen.getCol() == 7) {
             return true;
         }
-       for(int c = queen.getCol(); c < 8; c++) {
+       for(int c = queen.getCol()+1; c < 8; c++) {
             if(board[queen.getRow()][c] != null)
                 return false;
         }
@@ -90,7 +90,7 @@ public class Board {
         if(queen.getCol() == 0) {
             return true;
         }
-        for(int c = queen.getCol(); c >= 0; c--) {
+        for(int c = queen.getCol()-1; c >= 0; c--) {
             if(board[queen.getRow()][c] != null)
                 return false;
         }
@@ -100,8 +100,8 @@ public class Board {
         if(queen.getRow() == 7 || queen.getCol() == 7) {
             return true;
         }
-        for(int r = queen.getRow(); r < 8; r++) {
-            for(int c = queen.getCol(); c < 8; c++) {
+        for(int r = queen.getRow()+1; r < 8; r++) {
+            for(int c = queen.getCol()+1; c < 8; c++) {
                 if(board[r][c] != null)
                     return false;
             }
@@ -115,8 +115,8 @@ public class Board {
         if(queen.getRow() == 7 || queen.getCol() == 0) {
             return false;
         }
-        for(int r = queen.getRow(); r < 8; r++) {
-            for(int c = queen.getCol(); c >= 0; c--) {
+        for(int r = queen.getRow()+1; r < 8; r++) {
+            for(int c = queen.getCol()-1; c >= 0; c--) {
                 if(board[r][c] !=null) {
                     return false;
                 }
@@ -129,8 +129,8 @@ public class Board {
         if(queen.getRow() == 0 || queen.getCol() == 7) {
             return true;
         }
-        for(int r = queen.getRow(); r >= 0; r--) {
-            for(int c = queen.getCol(); c < 8; c++) {
+        for(int r = queen.getRow()-1; r >= 0; r--) {
+            for(int c = queen.getCol()+1; c < 8; c++) {
                 if(board[r][c] != null)
                     return false;
             }
@@ -143,8 +143,8 @@ public class Board {
         if(queen.getRow() == 0 || queen.getCol() == 0) {
             return false;
         }
-        for(int r = queen.getRow(); r >= 0; r--) {
-            for(int c = queen.getCol(); c >= 0; c--) {
+        for(int r = queen.getRow()-1; r >= 0; r--) {
+            for(int c = queen.getCol()-1; c >= 0; c--) {
                 if(board[r][c] !=null) {
                     return false;
                 }
@@ -156,7 +156,8 @@ public class Board {
     public void setBoardState(String coordinateString) {
         this.board = new Queen[8][8];
         for(int col = 0; col < 8; col++) {
-            int row = Integer.parseInt(coordinateString.charAt(col) + "");
+            String sRow = coordinateString.charAt(col) + "";
+            int row = Integer.parseInt(sRow)-1;
             board[row][col] = new Queen(row,col);
         }
     }

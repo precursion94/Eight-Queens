@@ -5,8 +5,10 @@ public class Main {
 	private static final int crossRate = 60;
 
 	public static void main(String[] args) {
-		Population initPop = initialPopulation();
-		printPopulation(initPop);
+		//Population initPop = initialPopulation();
+		//printPopulation(initPop);
+		Board b = new Board("17582463");
+		System.out.println(b.getFitness());
 	}
 	
 	/*Creates a random individual*/
