@@ -12,10 +12,22 @@ public class Main {
 		//System.out.println("TESTPOP1");
 		//printPopulation(testPop1);
 		
-		Population nextGen = nextGeneration(testPop1);
-		System.out.println("NEXTGEN");
-		printPopulation(nextGen);
+		//Population nextGen = nextGeneration(testPop1);
+		//System.out.println("NEXTGEN");
 		//printPopulation(nextGen);
+		//printPopulation(nextGen);
+
+		System.out.println("TESTPOP1");
+		printPopulation(testPop1);
+
+		Population nextGen = nextGeneration(testPop1);
+		//System.out.println("NEXTGEN");
+		//printPopulation(nextGen);
+
+		System.out.println("TESTPOP1");
+		printPopulation(testPop1);
+		System.out.println(testPop1.selectIndividual().getFitness());
+        System.out.println(nextGen.selectIndividual().getFitness());
 	}
 	
 	/*Creates a random individual*/
@@ -80,7 +92,7 @@ public class Main {
 		Individual randomIndividual = source.selectIndividual();
 		System.out.print(arrayIndex);
 		System.out.print(" RandFit: " + randomIndividual.getFitness());
-		Individual copy = new Individual(arrayIndex, randomIndividual.getCoords());
+		Individual copy = new Individual(arrayIndex, randomIndividual.getCoords().clone());
 		System.out.print(" Premutate: " + copy.getFitness());
 		copy.mutationRoulette();
 		System.out.println(" CopyFit: " + copy.getFitness());
