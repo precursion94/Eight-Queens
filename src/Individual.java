@@ -10,6 +10,7 @@ public class Individual {
 	Individual(int number, int[] coords){
 		this.coords = coords;
 		this.number = number;
+		fitness = new Board(arrayToString(coords)).getFitness();
 		//assign fitness metric
 	}
 	
