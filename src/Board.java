@@ -100,11 +100,13 @@ public class Board {
         if(queen.getRow() == 7 || queen.getCol() == 7) {
             return true;
         }
+        int c = queen.getCol()+1;
         for(int r = queen.getRow()+1; r < 8; r++) {
-            for(int c = queen.getCol()+1; c < 8; c++) {
-                if(board[r][c] != null)
-                    return false;
-            }
+            if(c >= board[0].length)
+                break;
+            if(board[r][c] != null)
+                return false;
+            c++;
         }
         return true;
     }
@@ -113,14 +115,17 @@ public class Board {
     public boolean testUpLeft(Queen queen) {
 
         if(queen.getRow() == 7 || queen.getCol() == 0) {
-            return false;
+            return true;
         }
+        int c = queen.getCol()-1;
         for(int r = queen.getRow()+1; r < 8; r++) {
-            for(int c = queen.getCol()-1; c >= 0; c--) {
-                if(board[r][c] !=null) {
-                    return false;
-                }
+            if(c < 0)
+                break;
+
+            if(board[r][c] !=null) {
+                return false;
             }
+            c--;
         }
         return true;
     }
@@ -129,11 +134,13 @@ public class Board {
         if(queen.getRow() == 0 || queen.getCol() == 7) {
             return true;
         }
+        int c = queen.getCol()+1;
         for(int r = queen.getRow()-1; r >= 0; r--) {
-            for(int c = queen.getCol()+1; c < 8; c++) {
-                if(board[r][c] != null)
-                    return false;
-            }
+            if(c >= board[0].length)
+                break;
+            if(board[r][c] != null)
+                return false;
+            c++;
         }
         return true;
     }
@@ -141,14 +148,16 @@ public class Board {
     public boolean testDownLeft (Queen queen) {
 
         if(queen.getRow() == 0 || queen.getCol() == 0) {
-            return false;
+            return true;
         }
+        int c = queen.getCol()-1;
         for(int r = queen.getRow()-1; r >= 0; r--) {
-            for(int c = queen.getCol()-1; c >= 0; c--) {
-                if(board[r][c] !=null) {
-                    return false;
-                }
+            if(c < 0)
+                break;
+            if(board[r][c] !=null) {
+                return false;
             }
+            c--;
         }
         return true;
     }
