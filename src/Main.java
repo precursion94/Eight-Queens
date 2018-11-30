@@ -7,15 +7,15 @@ public class Main {
 	private static int arrayIndex;
 
 	public static void main(String[] args) {
-		Board testBoard = new Board("17273645");
-		System.out.println(testBoard.getFitness());
 		Population testPop1 = initialPopulation();
 		//Population testPop2 = initialPopulation();
 		//System.out.println("TESTPOP1");
-		printPopulation(testPop1);
+		//printPopulation(testPop1);
+		
 		Population nextGen = nextGeneration(testPop1);
 		System.out.println("NEXTGEN");
 		printPopulation(nextGen);
+		//printPopulation(nextGen);
 	}
 	
 	/*Creates a random individual*/
@@ -60,6 +60,7 @@ public class Main {
 		Individual crossed = new Individual(arrayIndex, crossover(mother.getCoords(), father.getCoords()));
 		System.out.println(" Crossed: " + crossed.getFitness());
 		crossed.mutationRoulette();
+		crossed.recalculateFitness();
 		target.individuals[arrayIndex] = crossed;
 		arrayIndex++;
 	}
@@ -160,8 +161,9 @@ public class Main {
 	private static void printPopulation(Population population) {
 		for (Individual individual : population.individuals) {
 			printIndividual(individual);
-			//System.out.println("Fitness: " + population.averageFitness());
 		}
+		System.out.println();
+		//System.out.println("Population Fitness: " + population.averageFitness() + "\n");
 	}
 	
 	private static void printIndividual(Individual individual) {

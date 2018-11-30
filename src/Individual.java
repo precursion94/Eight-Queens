@@ -13,7 +13,7 @@ public class Individual {
 		fitness = new Board(arrayToString(coords)).getFitness();
 	}
 	
-	private void recalculateFitness() {
+	public void recalculateFitness() {
 		fitness = new Board(arrayToString(coords)).getFitness();
 	}
 	
