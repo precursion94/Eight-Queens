@@ -15,7 +15,8 @@ public class Population {
 		double average;
 		
 		for (Individual individual : individuals) {
-			fitnessSum = fitnessSum + individual.getFitness();
+			System.out.println("Wal");
+			//fitnessSum = fitnessSum + individual.getFitness();
 		}
 		
 		average = fitnessSum / POPULATION_SIZE;
