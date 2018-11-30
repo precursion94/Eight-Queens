@@ -7,11 +7,11 @@ public class Main {
 	private static int arrayIndex;
 
 	public static void main(String[] args) {
-		//Board testBoard = new Board("17582463");
-		//System.out.println(testBoard.getFitness());
+		Board testBoard = new Board("17273645");
+		System.out.println(testBoard.getFitness());
 		Population testPop1 = initialPopulation();
-		Population testPop2 = initialPopulation();
-		System.out.println("TESTPOP1");
+		//Population testPop2 = initialPopulation();
+		//System.out.println("TESTPOP1");
 		printPopulation(testPop1);
 		Population nextGen = nextGeneration(testPop1);
 		System.out.println("NEXTGEN");
@@ -40,8 +40,11 @@ public class Main {
 	private static Population nextGeneration(Population currentGeneration) {
 		Population nextGeneration = null;
 		
-		nextGeneration = performCopies(currentGeneration, nextGeneration);
-		nextGeneration = performCrossovers(currentGeneration, nextGeneration);
+		performCopies(currentGeneration, nextGeneration);
+		performCrossovers(currentGeneration, nextGeneration);
+		
+		System.out.println("Woop");
+		printPopulation(nextGeneration);
 		
 		return nextGeneration;
 	}
@@ -51,14 +54,17 @@ public class Main {
 		/*modifying original population individual? does it even matter?*/
 		Individual mother = source.selectIndividual();
 		Individual father = source.selectIndividual();
+		System.out.print(arrayIndex);
+		System.out.print(" Mother: " + mother.getFitness());
+		System.out.print(" Father: " + father.getFitness());
 		Individual crossed = new Individual(arrayIndex, crossover(mother.getCoords(), father.getCoords()));
+		System.out.println(" Crossed: " + crossed.getFitness());
 		crossed.mutationRoulette();
 		target.individuals[arrayIndex] = crossed;
 		arrayIndex++;
 	}
 	
 	private static Population performCrossovers(Population source, Population target) {
-		arrayIndex = 0;
 		for (int i = 0; i < crossRate; i++) {
 			performCrossover(source, target);
 		}
@@ -71,8 +77,12 @@ public class Main {
 		/*potential reference/value problem*/
 		/*modifying original population individual? does it even matter?*/
 		Individual randomIndividual = source.selectIndividual();
+		System.out.print(arrayIndex);
+		System.out.print(" RandFit: " + randomIndividual.getFitness());
 		Individual copy = new Individual(arrayIndex, randomIndividual.getCoords());
+		System.out.print(" Premutate: " + copy.getFitness());
 		copy.mutationRoulette();
+		System.out.println(" CopyFit: " + copy.getFitness());
 		
 		target.individuals[arrayIndex] = copy;
 		arrayIndex++;
@@ -155,9 +165,9 @@ public class Main {
 	}
 	
 	private static void printIndividual(Individual individual) {
-		System.out.println("Individual #: " + individual.getNumber());
-		System.out.println("Fitness: " + individual.getFitness());
-		System.out.print("Coords: "); printIntArray(individual.getCoords()); System.out.println();
+		System.out.print("Individual #: " + individual.getNumber());
+		System.out.print("  Fitness: " + individual.getFitness());
+		System.out.print("  Coords: "); printIntArray(individual.getCoords());
 	}
 	
 	private static void printIntArray(int[] input) {

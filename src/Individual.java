@@ -11,7 +11,6 @@ public class Individual {
 		this.coords = coords;
 		this.number = number;
 		fitness = new Board(arrayToString(coords)).getFitness();
-		//assign fitness metric
 	}
 	
 	private void recalculateFitness() {
@@ -27,13 +26,12 @@ public class Individual {
 		}
 		
 		coords[randomIndex] = randomValue;
-		fitness = new Board(arrayToString(coords)).getFitness();
+		recalculateFitness();
 	}
 	
 	public void mutationRoulette() {
 		if (rand.nextInt(100) < mutationRate) {
 			mutate();
-			
 		}
 	}
 	
