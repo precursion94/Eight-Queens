@@ -34,9 +34,11 @@ public class Population {
 	}
 	
 	public Individual getFittest() {
-		Individual leader = individuals[0];
-		for (Individual individual : individuals) {
-			if((leader.getFitness() < individual.getFitness())) {
+		Individual[] sample = sampleIndividuals();
+		
+		Individual leader = sample[0];
+		for (Individual individual : sample) {
+			if((leader.getFitness() > individual.getFitness())) {
 				leader = individual;
 			}
 		}
@@ -46,5 +48,41 @@ public class Population {
 	
 	public void emptyPopulation() {		
 		individuals = null;
+	}
+	
+	public Individual copyIndividual(Individual individual) {
+		int[] coords = individual.getCoords().clone();
+		Individual copy = new Individual(0, coords);
+		
+		return copy;
+	}
+	
+	public Individual[] sampleIndividuals() {
+		Individual[] sample = new Individual[8];
+		int[] selected = new int[8];
+		Random rand = new Random();
+		int index = rand.nextInt(POPULATION_SIZE);
+		int sampleCount = 0;
+		
+		while(sampleCount < 8) {
+			if(!intInArray(index, selected)) {
+				sample[sampleCount] = individuals[index];
+				sampleCount++;
+			}
+		}
+
+		return sample;
+	}
+	
+	public boolean intInArray(int check, int[] intArray) {
+		boolean contained = false;
+		
+		for(int i : intArray) {
+			if(check == i) {
+				contained = true;
+			}
+		}
+		
+		return contained;
 	}
 }

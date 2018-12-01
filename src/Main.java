@@ -3,22 +3,30 @@ import java.util.Random;
 public class Main {
 	private static final int copyRate = 40;
 	private static final int crossRate = 60;
-	private static final int generations = 25;
+	private static final int generations = 500;
 	private static int arrayIndex;
 
 	public static void main(String[] args) {
-		Population testPop1 = initialPopulation();
-		System.out.println("TESTPOP1");
-		printPopulation(testPop1);
+		/*
+		Population test = initialPopulation();
+		printPopulation(test);
+		printIndividual(test.getFittest());
+		Population next = nextGeneration(test);
+		printIndividual(next.getFittest());
+		printIndividual(next.getFittest());
+		printIndividual(next.getFittest());
+		printIndividual(next.getFittest());
+		*/
 		
-		Population nextGen = nextGeneration(testPop1);
-		System.out.println("NEXTGEN");
-		printPopulation(nextGen);
+		Population currentGeneration = initialPopulation();
+		int generationCounter = 0;
 		
-		System.out.println("TESTPOP1");
-		printPopulation(testPop1);
-		
-		//printIndividual(nextGen.selectIndividual());
+		for(int i = 0; i < generations; i++) {
+			System.out.println("Generation #" + generationCounter);
+			printPopulation(currentGeneration);
+			currentGeneration = nextGeneration(currentGeneration);
+			generationCounter++;
+		}
 		
 	}
 	
