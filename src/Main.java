@@ -1,21 +1,20 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 	private static final int copyRate = 40;
 	private static final int crossRate = 60;
-	private static final int generations = 500;
+	private static final int generations = 50;
 	private static int arrayIndex;
 
 	public static void main(String[] args) {
 		/*
 		Population test = initialPopulation();
-		printPopulation(test);
-		printIndividual(test.getFittest());
+		
 		Population next = nextGeneration(test);
-		printIndividual(next.getFittest());
-		printIndividual(next.getFittest());
-		printIndividual(next.getFittest());
-		printIndividual(next.getFittest());
+		for(int i = 0; i < 100; i++) {
+			printIndividual(next.getFittest());
+		}
 		*/
 		
 		Population currentGeneration = initialPopulation();
@@ -28,6 +27,19 @@ public class Main {
 			generationCounter++;
 		}
 		
+		
+	}
+	
+	private static Individual getFittest(Population population) {
+		Individual fittest = new Individual();
+		int sampleSize = 10;
+		int sampleCount = 0;
+		
+		while(sampleCount < sampleSize) {
+			
+		}
+		
+		return fittest;
 	}
 	
 	/*Creates a random individual*/
@@ -61,8 +73,8 @@ public class Main {
 	private static void performCrossover(Population source, Population target){
 		/*potential reference/value problem*/
 		/*modifying original population individual? does it even matter?*/
-		Individual mother = source.selectIndividual();
-		Individual father = source.selectIndividual();
+		Individual mother = source.getFittest();
+		Individual father = source.getFittest();
 		//System.out.print(arrayIndex);
 		//System.out.print(" Mother: " + mother.getFitness());
 		//System.out.print(" Father: " + father.getFitness());
@@ -86,7 +98,7 @@ public class Main {
 	private static void performCopy(Population source, Population target) {
 		/*potential reference/value problem*/
 		/*modifying original population individual? does it even matter?*/
-		Individual randomIndividual = source.selectIndividual();
+		Individual randomIndividual = source.getFittest();
 		//System.out.print(arrayIndex);
 		//System.out.print(" RandFit: " + randomIndividual.getFitness());
 		Individual copy = new Individual(arrayIndex, randomIndividual.getCoords());
@@ -166,16 +178,29 @@ public class Main {
 		
 		return coords;
 	}
-	
+	/*
 	private static void printPopulation(Population population) {
-		int fitnessSum = 0;
+		//Scanner scanner = new Scanner(System.in);
+		//int woop;
 		for (Individual individual : population.individuals) {
 			printIndividual(individual);
-			fitnessSum = fitnessSum + individual.getFitness();
+			//if(individual.getFitness() == 0) {
+			//	woop = scanner.nextInt();
+			//}
 		}
-		//double averageFitness = fitnessSum / 100.00;
-		//System.out.println("Population Average Fitness: " + averageFitness + "\n");
 		System.out.println("Population Average Fitness: " + population.averageFitness() + "\n");
+	}
+	*/
+	
+	private static void printPopulation(Population population) {
+		int winners = 0;
+		for(Individual individual : population.individuals) {
+			if(individual.getFitness() == 0) {
+				winners++;
+			}
+		}
+		System.out.println("\nAverage Fitness: " + population.averageFitness());
+		System.out.println(winners + " winners.\n");
 	}
 	
 	private static void printIndividual(Individual individual) {

@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Population {
 	public static final int POPULATION_SIZE = 100;
-	private static final int SELECTION_SIZE = 8;
+	private static final int SELECTION_SIZE = 20;
 	public static Individual[] individuals = new Individual[POPULATION_SIZE];
 	
 	Population() {
@@ -58,17 +58,11 @@ public class Population {
 	}
 	
 	public Individual[] sampleIndividuals() {
-		Individual[] sample = new Individual[8];
-		int[] selected = new int[8];
-		Random rand = new Random();
-		int index = rand.nextInt(POPULATION_SIZE);
-		int sampleCount = 0;
+		Individual[] sample = new Individual[SELECTION_SIZE];
+		Random random = new Random();
 		
-		while(sampleCount < 8) {
-			if(!intInArray(index, selected)) {
-				sample[sampleCount] = individuals[index];
-				sampleCount++;
-			}
+		for(int i = 0; i < SELECTION_SIZE; i++) {
+			sample[i] = individuals[random.nextInt(POPULATION_SIZE)];
 		}
 
 		return sample;

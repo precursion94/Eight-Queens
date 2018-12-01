@@ -7,6 +7,10 @@ public class Individual {
 	private int fitness;
 	private int number;
 	
+	Individual(){
+		
+	}
+	
 	Individual(int number, int[] coords){
 		this.coords = coords;
 		this.number = number;
