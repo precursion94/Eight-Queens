@@ -19,16 +19,12 @@ public class Board {
     }
 
     public int getFitness() {
-        //setBoardState(coordinateString);
-
-        int totalCollisions =0;
+    	int totalCollisions =0;
         for(int r = 0; r < board.length; r++) {
             for(int c = 0; c < board.length; c++) {
                Queen queen = board[r][c];
                if(queen != null) {
                    totalCollisions += countQueenCollisions(queen);
-
-//                       System.out.println("Collisions: "  + collisions);
               }
             }
         }

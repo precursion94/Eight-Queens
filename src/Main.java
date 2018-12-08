@@ -8,26 +8,20 @@ public class Main {
 	private static int arrayIndex;
 
 	public static void main(String[] args) {
-		/*
-		Population test = initialPopulation();
-		
-		Population next = nextGeneration(test);
-		for(int i = 0; i < 100; i++) {
-			printIndividual(next.getFittest());
-		}
-		*/
-		
 		Population currentGeneration = initialPopulation();
-		int generationCounter = 0;
+		int generationCounter = 1;
+		
+		System.out.println("Generation #" + generationCounter);
+		printPopulation(currentGeneration);
 		
 		for(int i = 0; i < generations; i++) {
-			System.out.println("Generation #" + generationCounter);
-			printPopulation(currentGeneration);
 			currentGeneration = nextGeneration(currentGeneration);
+			System.out.println("Generation #" + generationCounter);
+			printPopulation(currentGeneration, 1);
 			generationCounter++;
 		}
 		
-		
+		printPopulation(currentGeneration);
 	}
 	
 	private static Individual getFittest(Population population) {
@@ -71,15 +65,9 @@ public class Main {
 	}
 	
 	private static void performCrossover(Population source, Population target){
-		/*potential reference/value problem*/
-		/*modifying original population individual? does it even matter?*/
 		Individual mother = source.getFittest();
 		Individual father = source.getFittest();
-		//System.out.print(arrayIndex);
-		//System.out.print(" Mother: " + mother.getFitness());
-		//System.out.print(" Father: " + father.getFitness());
 		Individual crossed = new Individual(arrayIndex, crossover(mother.getCoords(), father.getCoords()));
-		//System.out.println(" Crossed: " + crossed.getFitness());
 		crossed.mutationRoulette();
 		crossed.recalculateFitness();
 		target.individuals[arrayIndex] = crossed;
@@ -96,15 +84,11 @@ public class Main {
 	
 	/**/
 	private static void performCopy(Population source, Population target) {
-		/*potential reference/value problem*/
-		/*modifying original population individual? does it even matter?*/
 		Individual randomIndividual = source.getFittest();
 		//System.out.print(arrayIndex);
 		//there's nothing stopping that value from being exactly the same asSystem.out.print(" RandFit: " + randomIndividual.getFitness());
 		Individual copy = new Individual(arrayIndex, randomIndividual.getCoords());
-		//System.out.print(" Premutate: " + copy.getFitness());
 		copy.mutationRoulette();
-		//System.out.println(" CopyFit: " + copy.getFitness());
 		
 		target.individuals[arrayIndex] = copy;
 		arrayIndex++;
@@ -178,21 +162,16 @@ public class Main {
 		
 		return coords;
 	}
-	/*
-	private static void printPopulation(Population population) {
-		//Scanner scanner = new Scanner(System.in);
-		//int woop;
-		for (Individual individual : population.individuals) {
-			printIndividual(individual);
-			//if(individual.getFitness() == 0) {
-			//	woop = scanner.nextInt();
-			//}
-		}
-		System.out.println("Population Average Fitness: " + population.averageFitness() + "\n");
-	}
-	*/
 	
 	private static void printPopulation(Population population) {
+		for (Individual individual : population.individuals) {
+			printIndividual(individual);
+		}
+		printPopulation(population, 1);
+	}
+	
+	
+	private static void printPopulation(Population population, int bullshit) {
 		int winners = 0;
 		for(Individual individual : population.individuals) {
 			if(individual.getFitness() == 0) {
