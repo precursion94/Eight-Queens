@@ -1,13 +1,17 @@
+import java.util.HashSet;
+import java.util.Set;
+
 public class Board {
     private Queen[][] board;
     private String coords;
+    private HashSet<CollisionCoords> collisionCoords;
 
     public Board(String coordinateString) {
         setBoardState(coordinateString);
+        collisionCoords = new HashSet<CollisionCoords>();
     }
     
     public Board() {
-    	
     }
     
     public Queen[][] getBoard() {
@@ -60,6 +64,7 @@ public class Board {
         }
         for(int r = queen.getRow()+1; r < 8; r++) {
             if(board[r][queen.getCol()] != null)
+                collisionCoords.add(new CollisionCoords(queen.getRow(), r, queen.getCol(), queen.getCol()));
                 return false;
         }
         return true;
@@ -70,6 +75,7 @@ public class Board {
         }
         for(int r = queen.getRow()-1; r >= 0; r--) {
             if(board[r][queen.getCol()] != null)
+                collisionCoords.add(new CollisionCoords(queen.getRow(), r, queen.getCol(), queen.getCol()));
                 return false;
         }
         return true;
@@ -81,6 +87,7 @@ public class Board {
         }
        for(int c = queen.getCol()+1; c < 8; c++) {
             if(board[queen.getRow()][c] != null)
+                collisionCoords.add(new CollisionCoords(queen.getRow(), queen.getRow(), queen.getCol(), c));
                 return false;
         }
         return true;
@@ -92,6 +99,7 @@ public class Board {
         }
         for(int c = queen.getCol()-1; c >= 0; c--) {
             if(board[queen.getRow()][c] != null)
+                collisionCoords.add(new CollisionCoords(queen.getRow(), queen.getRow(), queen.getCol(), c));
                 return false;
         }
         return true;
@@ -104,8 +112,10 @@ public class Board {
         for(int r = queen.getRow()+1; r < 8; r++) {
             if(c >= board[0].length)
                 break;
-            if(board[r][c] != null)
+            if(board[r][c] != null) {
+                collisionCoords.add(new CollisionCoords(queen.getRow(), r, queen.getCol(), c));
                 return false;
+            }
             c++;
         }
         return true;
@@ -123,6 +133,7 @@ public class Board {
                 break;
 
             if(board[r][c] !=null) {
+                collisionCoords.add(new CollisionCoords(queen.getRow(), r, queen.getCol(), c));
                 return false;
             }
             c--;
@@ -138,9 +149,12 @@ public class Board {
         for(int r = queen.getRow()-1; r >= 0; r--) {
             if(c >= board[0].length)
                 break;
-            if(board[r][c] != null)
+            if(board[r][c] != null) {
+                collisionCoords.add(new CollisionCoords(queen.getRow(), r, queen.getCol(), c));
                 return false;
+            }
             c++;
+
         }
         return true;
     }
@@ -155,6 +169,7 @@ public class Board {
             if(c < 0)
                 break;
             if(board[r][c] !=null) {
+                collisionCoords.add(new CollisionCoords(queen.getRow(), r, queen.getCol(), c));
                 return false;
             }
             c--;

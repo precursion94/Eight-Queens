@@ -13,4 +13,12 @@ public class Queen {
    public int getCol() {
         return col;
    }
+
+   @Override
+   public boolean equals(Object other) {
+       Queen otherQueen = (Queen) other;
+        if(this.row == otherQueen.row && this.col == otherQueen.col)
+            return true;
+        return false;
+   }
 }

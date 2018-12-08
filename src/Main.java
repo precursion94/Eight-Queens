@@ -34,7 +34,7 @@ public class Main {
 		Individual fittest = new Individual();
 		int sampleSize = 10;
 		int sampleCount = 0;
-		
+
 		while(sampleCount < sampleSize) {
 			
 		}
@@ -100,7 +100,7 @@ public class Main {
 		/*modifying original population individual? does it even matter?*/
 		Individual randomIndividual = source.getFittest();
 		//System.out.print(arrayIndex);
-		//System.out.print(" RandFit: " + randomIndividual.getFitness());
+		//there's nothing stopping that value from being exactly the same asSystem.out.print(" RandFit: " + randomIndividual.getFitness());
 		Individual copy = new Individual(arrayIndex, randomIndividual.getCoords());
 		//System.out.print(" Premutate: " + copy.getFitness());
 		copy.mutationRoulette();
