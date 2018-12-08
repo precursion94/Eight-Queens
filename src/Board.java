@@ -185,4 +185,24 @@ public class Board {
             board[row][col] = new Queen(row,col);
         }
     }
+
+    public int getCollisionCount() {
+        return collisionCoords.size();
+    }
+    public String outputCollisions() {
+        String output = "";
+        for(CollisionCoords cc : collisionCoords) {
+            output += cc;
+        }
+        return output;
+    }
+    public CollisionCoords[] getCollisionCoords() {
+        CollisionCoords[] coords = new CollisionCoords[collisionCoords.size()];
+        int i = 0;
+       for(CollisionCoords cc : collisionCoords) {
+          coords[i] = cc;
+          i++;
+       }
+       return coords;
+    }
 }
